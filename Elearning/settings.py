@@ -133,5 +133,6 @@ MEDIA_URL = '/images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
-KEY_ID = "rzp_test_tfjVwVIydEuQgx"
-KEY_SECRET = "k3za28ccyb21pd5WZm1qmbT6"
+#razorpay id secret key
+KEY_ID = ""
+KEY_SECRET = ""

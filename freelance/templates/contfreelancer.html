@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block body %}
+
+<div class="container mt-5">
+
+    
+    <div class="card">
+        <div class="container">
+            <form method="post" style="margin-top: 1.3em;">
+                {{ fcontact_form.as_p }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+              </form>
+        </div>
+    </div>
+
+</div>
+
+{%endblock body %}

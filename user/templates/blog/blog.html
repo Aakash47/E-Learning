@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Blog's{% endblock %}
+{% block body %}
+
+<div class="container d-flex flex-wrap mt-5">
+{% for post in posts %}
+<div class="card mx-2 mt-5" style="width: 18rem;">
+    <img src="{{ post.imageURL }}" class="card-img-top" height="250rem" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ post.title }}</h5>
+      <p class="card-text">{{ post.content|safe|truncatewords:15|linebreaks }}</p>
+      <a class="btn btn-outline-dark" href="{% url 'Blogpost' post.slug %}">read more...</a>
+      <hr>
+          <small class="py-4"><i>Author : {{ post.author }} | Date : {{ post.date_posted }}</i></small>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{%endblock body %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<div class="container my-view">
+    <div class="container py-4">
+        <img src="{{ product.imageURL }}" class="d-block my-product" alt="...">
+    </div>
+    <div class="container">
+        <h2 class="featurette-heading py-4">{{ product.name }}</h2>
+        <strong class="py-4">₹ : {{ product.price }} </strong>
+        <p class="lead">{{ product.description }}</p>
+        <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-primary update-cart">Add to Cart</button>
+    </div>
+</div>
+
+{% endblock body %}

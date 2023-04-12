@@ -1,0 +1,86 @@
+html{
+    font-size: 62.5%;
+}
+body{
+  background: #EEFCFC;
+    height: 76.9rem;
+    
+}
+.navbar{
+
+    border: solid #000 0.12rem;
+    height: 7rem;
+    background-color: #18191a;
+}
+
+.navbar-header{
+    transform: translateX(-50%);
+    margin-left: 50%;
+}
+.navbar-header a{
+    font-size: 3rem;
+    color: white;
+
+}
+.navbar-right{
+    margin-right: 6rem;
+}
+.navbar-right button{
+    background-color: #FFC700;
+    margin-right: 3rem;
+    font-size: 2rem;
+    height: 4rem;
+}
+#cart{
+    height: 3rem;
+    width: 4rem;
+}
+.sidenav {
+    border: solid #000 0.12rem;
+    height: 100%;
+    width: 20rem;
+    position: fixed;
+    z-index: 1;
+    top: 6.9rem;
+    left: 0;
+    background-color: #E6F4F1;
+    overflow-x: hidden;
+    padding-top: 2rem;
+    padding-left: 3rem;
+  }
+  
+  .sidenav a {
+    padding: 0.36rem 0.36rem 0.36rem ;
+    text-decoration: none;
+    font-size: 2rem;
+    color: #818181;
+    display: block;
+  }
+  .sidenav {
+      border:solid #000  0.12rem ;
+  }
+#cart_img{
+    margin-top: -1rem;
+    height:3rem;
+    width:4rem;
+}
+#cart-total{
+    position: absolute;
+    margin-left:25rem;
+    margin-top: -4.5rem;
+	display: block;
+	text-align: center;
+	color:#fff;
+	background-color: red;
+	width: 1.7rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	font-size: 1.5rem;
+}
+.btn{
+    font-size: 1.5rem;
+}
+button a{
+    color: #000;
+    text-decoration: none;
+}

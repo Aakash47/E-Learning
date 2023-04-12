@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Book's{% endblock %}
+{% block body %}
+<div class="container d-flex flex-wrap mt-5">
+  {% for product in products %}
+  <div class="card mt-5 mx-2" style="width: 18rem;">
+    <img src="{{ product.imageURL }}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">{{ product.description }}</p>
+      <p><strong class="py-4">₹ : {{ product.price|floatformat:2 }} </strong></p>
+      <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-primary update-cart">Add to Cart</button>
+      <a href="{% url 'storeview' product.slug %}" class="btn btn-outline-success">View</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock body %}

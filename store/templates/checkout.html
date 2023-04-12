@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+     <div class="row my-card">
+		<div class="col-lg-6">
+			<div class="box-element" id="form-wrapper">
+				<form id="form" method="POST" action="">
+					{% csrf_token %}
+					
+					<div class="card" id="shipping-info">
+						<hr>
+						<p>Shipping Information:</p>
+						<hr>
+						<div class="form-field">
+							<input class="form-control" type="text" name="address" placeholder="Address">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="city" placeholder="City">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="state" placeholder="State">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="number" name="zipcode" placeholder="Zipcode">
+						</div>
+						
+						<button id="form-button" class="btn btn-success btn-block" type="submit">Continue</button>
+					</div>
+
+					<hr>
+				</form>
+			</div>
+
+			<br>
+			<div class="box-element hidden" id="payment-info">
+				<a class="btn btn-light border" id="make-payment" href="?action=create_payment">Continue to Payment</a>
+			</div>
+			
+		</div>
+
+		<div class="col-lg-6">
+			<div class="box-element">
+				<a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+				<hr>
+				<h3>Order Summary</h3>
+				<hr>
+				{% for item in items %}
+				<div class="cart-row">
+					<div style="flex:2"><img class="row-image" src="{{ item.product.imageURL }}"></div>
+					<div style="flex:2"><p>{{item.product.name}}</p></div>
+					<div style="flex:2"><p>{{item.product.category|capfirst}}</p></div>
+					<div style="flex:1"><p>₹{{ item.product.price }}</p></div>
+					<div style="flex:1"><p>x{{ item.quantity }}</p></div>
+				</div>
+				{% endfor %}
+				<h5>Items: {{ order.get_cart_items }}</h5>
+				<h5>Total: ₹ {{ order.get_cart_total|floatformat:2 }}</h5>
+			</div>
+		</div>
+	</div>
+
+ <script>
+
+	var total = '{{order.get_cart_total}}'
+
+	var form = document.getElementById('form')
+		form.addEventListener('submit', function(e){
+	    	e.preventDefault()
+	    	console.log('Form Submitted...')
+	    	document.getElementById('form-button').classList.add("hidden");
+	    	document.getElementById('payment-info').classList.remove("hidden");
+			submitFormData()
+	    }) 
+
+
+	function submitFormData(){
+	    console.log('Payment button clicked')
+
+		// var userFormData = {
+		// 		'name':null,
+		// 		'email':null,
+		// 		'total':total,
+		// 	}
+
+		var shippingInfo = {
+			'address':null,
+			'city':null,
+			'state':null,
+			'zipcode':null,
+		}
+
+		
+		shippingInfo.address = form.address.value
+		shippingInfo.city = form.city.value
+		shippingInfo.state = form.state.value
+		shippingInfo.zipcode = form.zipcode.value
+		
+
+	var url = "/process_order/"
+		fetch(url, {
+			method:'POST',
+			headers:{
+				'Content-Type':'applicaiton/json',
+				'X-CSRFToken':csrftoken,
+			}, 
+			body:JSON.stringify({'shipping':shippingInfo}),
+		})
+		.then((response) => response.json())
+	}
+	// 	.then((data) => {
+	// 		console.log('Success:', data);
+	// 		alert('Transaction completed');
+	// 		window.location.href = "{% url 'book' %}"
+	// 	})
+	// }
+</script>
+
+<!-- {% if razorpay_order is not None %} -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+<script>
+
+    var options = {
+        "key": "rzp_test_tfjVwVIydEuQgx", // Enter the Key ID generated from the Dashboard
+        "name": "Elearning",
+        "description": "Payment For order",
+        "image": "https://png.pngtree.com/element_pic/00/16/07/115783931601b5c.jpg",
+        "order_id": "{{razorpay_order.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "callback_url": "http://localhost:8000/cart_verify_payment",
+        "prefill": {
+            "name": "{{user.name}}",
+            "email": "{{user.email}}",
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+
+    rzp1.open();
+	// submitFormData()
+
+</script>
+<!-- {% endif %} -->
+
+{% endblock body %}

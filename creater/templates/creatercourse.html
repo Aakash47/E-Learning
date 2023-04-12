@@ -1,0 +1,42 @@
+{% extends "main.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block title %}Creater Courses{% endblock %}
+{% block body %}
+
+<div class="container d-flex flex-row mt-5">
+<div class="card mt-3 m-auto p-3">
+
+    <div class="row">
+        <div class="col-md">
+            <!-- <div class="card card-body"> -->
+                <table class="table ">
+                    <tr>
+                        <th></th>
+                        <th>Courses</th>
+                        <th>Price</th>
+                        <th>Active On</th>
+                        <th>Date Posted</th>
+                        <th><a class="btn btn-outline-dark" href="{% url 'addcourse' %}">Add Course</a></th>
+                    </tr>
+                    {% for course in courses %}
+
+                    <tr>
+                        <td><img src="{{ course.thumbnailURL }}" class="row-image" alt="..."></td>
+                        <td>{{course.name}}</td>
+                        <td>{{course.price}}</td>
+                        <td>{{course.active}}</td>
+                        <td>{{course.date}}</td>
+                        <td><a class="btn btn-outline-success" href="{% url 'updatecourse' course.slug %}">Update</a></td>
+                        <!-- <td><a class="btn btn-outline-danger" href="">Delete</a></td> -->
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+{%endblock body %}

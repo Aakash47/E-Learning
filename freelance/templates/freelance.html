@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block title %}Freelance{% endblock %}
+{% block body %}
+
+<div class="d-flex flex-wrap">
+    <h1 class="display-5">Freelancers:</h1>
+    {% for freelancer in freelancers %}
+    <div class="card mycard">
+        <img src="{{freelancer.thumbnailURL}}" class="card-img-top" height="250rem" alt="...">
+        <div class="card-body">
+            <h5 class="card-title"><strong>Name: </strong>{{ freelancer.user.name }}</h5>
+            <p class="card-text"><strong>Email: </strong>{{ freelancer.user.email }}</p>
+            <p class="card-text"><strong>Description: </strong>{{ freelancer.description }}</p>
+            <a class="btn btn-outline-dark" href="{% url 'freelancepage' freelancer.slug %}">View</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{%endblock body %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block title %}Courses{% endblock %}
+{% block body %}
+
+
+<div class="container d-flex flex-wrap mt-5">
+
+  {% for course in courses %}
+
+  <div class="card mx-2 mt-5" style="width: 18rem;">
+    <img src="{{course.thumbnailURL}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ course.name }}</h5>
+      <p class="card-text">{{ course.description }}</p>
+      {% if course.price is 0 %}
+      <p><strong>Free</strong></p>
+      {% else %}
+      <p class="card-text">Save {{ course.discount }}%</p>
+      <p><strong class="py-4">
+          <del>{{ course.price|floatformat:2 | rupee }}</del>&nbsp;
+          <span>{% cal_sellprice course.price course.discount as value %} {{ value | floatformat:2 | rupee }}</span>
+        </strong></p>
+        {% endif %}
+        {% is_enrolled request course as enrolled %}
+
+        {% if enrolled %}
+          <a href="{% url 'coursePage' course.slug %}" class="btn btn-outline-dark">Start Course</a>
+        {% else %}
+          <a href="{% url 'check-out' course.slug %}" class="btn btn-outline-success">Enroll Now</a>
+          <a href="{% url 'coursePage' course.slug %}" class="btn btn-outline-dark">View</a>
+        {% endif %}
+    </div>
+  </div>
+
+  {% endfor %}
+
+</div>
+
+{%endblock body %}

@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block title %}Upadte Blog{% endblock %}
+{% block body %}
+
+<div class="container d-flex flex-row mt-5">
+<div class="card mt-3 m-auto p-3">
+    <form method="POST" enctype="multipart/form-data" style="margin-top: 1.3em;">
+        {{updateblog.as_p}}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary  btn-lg">Edit</button>
+        {{updateblog.error}}
+      </form>
+</div>
+</div>
+
+{%endblock body %}

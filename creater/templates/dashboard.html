@@ -1,0 +1,129 @@
+{% extends "main.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block title %}Dashboard{% endblock %}
+{% block body %}
+
+<div class="container d-flex" style="margin-left: 0rem;">
+<div class="container-fluid" style="margin-top:5rem;">
+    <div class="row">
+        <div class="col-md">
+            <h3>Product Orders</h3>
+            <div class="card card-body" style="width: 46rem; height: 25rem; margin-left: 0rem;">
+                <table class="table list-group overflow-y-scroll ">
+                    <tr>
+                        <th></th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Order Id</th>
+                        <th>Date Orderd</th>
+                        <!-- <th>Payment</th> -->
+                        <th>Ordered By</th>
+                        <th>Address</th>
+
+                    </tr>
+                    {% for item in items %}
+
+                    <tr>
+                        <td><img src="{{ item.product.imageURL }}" class="row-image" alt="..."></td>
+                        <td>{{item.product.name}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.order.transaction_id}}</td>
+                        <td>{{item.order.date_ordered}}</td>
+                        <!-- <td>{{item.order.payment_status}}</td> -->
+                        <td>{{item.order.customer}}</td>
+                        <td>
+                            {% for add in adds %}
+                            {% if item.order.transaction_id == add.order.transaction_id %}
+                            <p>{{add.address}}</p>
+                            <p>{{add.city}}</p>
+                            <p>{{add.state}}</p>
+                            <p>{{add.zipcode}}</p>
+                            {% endif %}
+                            {% endfor %} 
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                </table>
+
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="margin-top:5rem;">
+    <div class="row">
+        <div class="col-md">
+            <h3>Enrolled Courses</h3>
+            <div class="card card-body" style="width: 45rem; height: 25rem;">
+                <table class="table list-group overflow-y-scroll ">
+                    <tr>
+                        <th></th>
+                        <th>Course</th>
+                        <th>Price</th>
+                        <th>Enrolled By</th>
+                        <th>Date Enrolled</th>
+                        <th>Payment Id</th>
+
+
+                    </tr>
+                    {% for encourse in citems %}
+
+                    <tr>
+                        <td><img src="{{encourse.course.thumbnailURL}}" class="row-image" alt="..."></td>
+                        <td>{{encourse.course.name}}</td>
+                        <td>{% cal_sellprice encourse.course.price encourse.course.discount as value %} {{ value | floatformat:2 | rupee }}</td>
+                        <td>{{encourse.user}}</td>
+                        <td>{{encourse.date}}</td>
+                        <td>{{encourse.payment_id}}</td>
+                        {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div class="container-fluid" style="margin-top:5rem;">
+    <div class="row">
+        <div class="col-md">
+            <h3>Freelance contacts</h3>
+            <div class="card card-body" style="width: 45rem; height: 25rem;">
+                <table class="table list-group overflow-y-scroll ">
+                    <tr>
+                        <th></th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>User</th>
+                        <th>Budget</th>
+                        <th>Contact No.</th>
+                    </tr>
+
+                    {% for fcontact in fitems %}
+
+                    <tr>
+                        <td><img src="{{fcontact.freelance.thumbnailURL}}" class="row-image" alt="..."></td>
+                        <td>{{fcontact.freelance.title}}</td>
+                        <td>{{fcontact.description}}</td>
+                        <td>{{fcontact.user}}</td>
+                        <td>{{fcontact.budget}}</td>
+                        <td>{{fcontact.contact_no}}</td>
+                    </tr>
+                        {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock body%}
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+</body>
+</html> -->

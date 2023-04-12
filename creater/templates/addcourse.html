@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block title %}Add Course{% endblock %}
+{% block body %}
+
+<div class="container d-flex flex-row mt-5">
+  <div class="card mt-3 m-auto p-3">
+    <form method="POST" enctype="multipart/form-data" action="" style="margin-top: 1.3em;">
+      <!-- {% for course in courseform %}
+        {{ course }}
+        <hr>
+      {% endfor %} -->
+        <p><strong>Add Courses</strong></p>
+        {{ addcourses.as_p }}
+        <p><strong>Add Tags</strong></p>
+        {{ addtags.as_p }}
+        <p><strong>Add Pre</strong></p>
+        {{ addpre.as_p }}
+        <p><strong>Add learn</strong></p>
+        {{ addlearn.as_p }}
+        <p><strong>Add Video</strong></p>
+        <!-- {{ addvideos.as_p }} -->
+        {{formset.management_form}}
+        {%for form in formset%}
+          {{form}}
+          <hr>
+        {%endfor%}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+        {{addcourses.error}}
+        {{addtags.error}}
+        {{addvideos.error}}
+        {{addpre.error}}
+        {{addlearn.error}}
+      </form>
+</div>
+</div>
+
+{%endblock body %}

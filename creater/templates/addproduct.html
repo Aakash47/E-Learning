@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block title %}Add Products{% endblock %}
+{% block body %}
+
+<div class="container d-flex flex-row mt-5">
+  <div class="card mt-3 m-auto p-3">
+    <form method="POST" enctype="multipart/form-data" style="margin-top: 1.3em;">
+        {{ addproducts.as_p }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+      </form>
+</div>
+</div>
+
+{%endblock body %}

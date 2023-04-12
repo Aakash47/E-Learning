@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block title %}Update Freelance{% endblock %}
+{% block body %}
+
+<div class="container d-flex flex-row mt-5">
+  <div class="card mt-3 m-auto p-3">
+    <form method="POST" enctype="multipart/form-data" action="" style="margin-top: 1.3em;">
+        {{ updatefreelances.as_p }}
+        <!-- {{ addprojects.as_p }} -->
+        <p><strong>Add Skills and Projects</strong></p>
+
+        {{formset.management_form}}
+        {%for form in formset%}
+        {{form}}
+        <hr>
+        {%endfor%}
+
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+        {{updatefreelances.error}}
+        {{formset.error}}
+      </form>
+  </div>
+</div>
+
+{%endblock body %}

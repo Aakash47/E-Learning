@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block title %}Freelance{% endblock %}
+{% block body %}
+
+<div class="container mt-5">
+    <div class="center mt-5">
+        <img class="frimg" src="{{freelance.thumbnailURL}}" alt="">
+    </div>
+    <div class="container mt-3">
+        <div class="card text-center">
+        <h5 class="card-title"><strong>Name: </strong>{{ freelance.user.name }}</h5>
+        <p class="card-text"><strong>Email: </strong>{{ freelance.user.email }}</p>
+        <p class="card-text"><strong>Description: </strong>{{ freelance.description }}</p>
+        <p><strong>Skills:</strong></p>
+        {% for proj in freelance.projects_set.all %}
+        <p>{{proj.skills}}</p>
+        {% endfor %}
+        <p><strong>Projects:</strong></p>
+        {% for proj in freelance.projects_set.all %}
+        <p>{{proj.projects_done}}</p>
+        {% endfor %}
+        <!-- <p>{{proj.projects_links}}</p> -->
+        </div>
+        <div class="card mt-3">
+        
+
+        <div class="card">
+            <div class="container">
+                <form method="post" style="margin-top: 1.3em;">
+                    {{ fcontact_form.as_p }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+                  </form>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</div>
+
+{%endblock body %}

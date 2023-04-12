@@ -1,7 +1,7 @@
 # E-Learning-Learn-To-Earn
 
 ## Home Page
-![home_page](static\readme\home_page.png)
+![home_page](E-Learning-Learn-To-Earn-/tree/master/static/readme\home_page.png)
 
 ---
 

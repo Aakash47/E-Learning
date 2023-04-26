@@ -1,4 +1,4 @@
-# E-Learning-Learn-To-Earn
+# E-Learning
 
 ## Home Page
 ![home_page](static/readme/home_page.png)
